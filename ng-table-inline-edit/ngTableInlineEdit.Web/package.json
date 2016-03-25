@@ -1,0 +1,33 @@
+{
+  "name": "ng-table.inline.editing",
+  "version": "1.0.0",
+  "description": "Inline editing sample using ng-table",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kumudug/ng-table-inline-editing.git"
+  },
+  "keywords": [
+    "ng-table",
+    "inline",
+    "editing"
+  ],
+  "author": "Kumudu Gunasekara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kumudug/ng-table-inline-editing/issues"
+  },
+  "homepage": "https://github.com/kumudug/ng-table-inline-editing#readme",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-bower-install": "^1.6.0",
+    "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-ng-annotate": "^2.0.1",
+    "grunt-processhtml": "^0.3.13"
+  }
+}

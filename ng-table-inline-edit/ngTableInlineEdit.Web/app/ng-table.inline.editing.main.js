@@ -44,4 +44,51 @@
     config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 
     app.config(config);
+})(); (function () {
+    'use strict';
+
+    angular
+        .module('mainApp')
+        .controller('aboutCtrl', aboutCtrl);
+
+    aboutCtrl.$inject = []; 
+
+    function aboutCtrl() {
+        /* jshint validthis:true */
+        var vm = this;
+        vm.title = 'aboutCtrl';
+
+    }
+})();
+ (function () {
+    'use strict';
+
+    angular
+        .module('mainApp')
+        .controller('homeCtrl', homeCtrl);
+
+    homeCtrl.$inject = []; 
+
+    function homeCtrl() {
+        /* jshint validthis:true */
+        var vm = this;
+        vm.title = 'homeCtrl';
+
+    }
+})();
+ (function () {
+    'use strict';
+
+    angular
+        .module('mainApp')
+        .controller('indexCtrl', indexCtrl);
+
+    indexCtrl.$inject = []; 
+
+    function indexCtrl() {
+        /* jshint validthis:true */
+        var vm = this;
+        vm.title = 'indexCtrl';
+
+    }
 })();

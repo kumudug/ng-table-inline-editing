@@ -29,7 +29,8 @@
     "angular-bootstrap": "^1.2.5",
     "angular-resource": "^1.5.2",
     "bootstrap": "^3.3.6",
-    "ng-table": "^0.8.3"
+    "ng-table": "^0.8.3",
+    "components-font-awesome": "^4.5.0"
   },
   "devDependencies": {
     "angular": "^1.5.2",

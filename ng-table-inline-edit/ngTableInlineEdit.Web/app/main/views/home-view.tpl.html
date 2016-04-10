@@ -1,3 +1,51 @@
-﻿<div>
-    {{vm.title}}
+﻿<div class="home-view">
+    <table ng-table="vm.tableParams" class="table table-striped table-bordered">
+        <tr ng-repeat="row in $data" ng-form name="tForm">
+            <td ng-switch="row.isEditing" title="'First Name'" class="first-name-col">
+                <span ng-switch-default>
+                    <label>{{row.firstName}}</label>
+                </span>
+                <span ng-switch-when="true">
+                    <input type="text" ng-model="row.firstName" class="form-control" />
+                </span>
+            </td>
+            <td ng-switch="row.isEditing" title="'Last Name'" class="second-name-col">
+                <span ng-switch-default>
+                    <label>{{row.lastName}}</label>
+                </span>
+                <span ng-switch-when="true">
+                    <input type="text" ng-model="row.lastName" class="form-control" />
+                </span>
+            </td>
+            <td ng-switch="row.isEditing" title="'Date of Birth'" class="dob-col">
+                <span ng-switch-default>
+                    <label>{{row.dob | date:'dd/MM/yyyy'}}</label>
+                </span>
+                <div ng-switch-when="true" class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup ng-model="row.dob" is-open="row.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" readonly />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openDatePopup(row)"><i class="fa fa-calendar"></i></button>
+                    </span>
+                </div>
+            </td>
+            <td ng-switch="row.isEditing" class="edit-btn-col">
+                <div class="btn-group" role="group" ng-switch-default>
+                    <button type="button" class="btn btn-default" ng-click="row.isEditing = !row.isEditing">
+                        <i class="fa fa-pencil-square-o edit-btn"></i>
+                    </button>
+                    <button type="button" class="btn btn-default"  ng-click="row.isEditing = !row.isEditing">
+                        <i class="fa fa-trash-o delete-btn"></i>
+                    </button>
+                </div>
+                <div class="btn-group" role="group" ng-switch-when="true">
+                    <button type="button" class="btn btn-default"  ng-click="row.isEditing = !row.isEditing">
+                        <i class="fa fa-floppy-o save-btn"></i>
+                    </button>
+                    <button type="button" class="btn btn-default"  ng-click="row.isEditing = !row.isEditing">
+                        <i class="fa fa-undo cancel-btn"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>

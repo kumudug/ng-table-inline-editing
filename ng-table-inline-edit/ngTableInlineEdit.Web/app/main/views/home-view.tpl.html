@@ -1,48 +1,97 @@
 ﻿<div class="home-view">
     <table ng-table="vm.tableParams" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <td><strong>First Name</strong></td>
+                <td><strong>Last Name</strong></td>
+                <td><strong>Date of Birth</strong></td>
+                <td>
+                    <button type="button" class="btn btn-default pull-right" ng-click="vm.actions.add()">
+                        <i class="fa fa-plus save-btn"></i>
+                    </button>
+                </td>
+            </tr>
+        </thead>
         <tr ng-repeat="row in $data" ng-form name="tForm">
-            <td ng-switch="row.isEditing" title="'First Name'" class="first-name-col">
+            <td ng-switch="row.actionState" class="first-name-col">
                 <span ng-switch-default>
                     <label>{{row.firstName}}</label>
                 </span>
-                <span ng-switch-when="true">
-                    <input type="text" ng-model="row.firstName" class="form-control" />
+                <span ng-switch-when="edit">
+                    <input type="text" ng-model="row.firstName" class="form-control" required/>
+                </span>
+                <span ng-switch-when="delete">
+                    <label class="deleted-item">{{row.firstName}}</label>
+                </span>
+                <span ng-switch-when="new">
+                    <input type="text" ng-model="row.firstName" class="form-control" required/>
                 </span>
             </td>
-            <td ng-switch="row.isEditing" title="'Last Name'" class="second-name-col">
+            <td ng-switch="row.actionState" class="second-name-col">
                 <span ng-switch-default>
                     <label>{{row.lastName}}</label>
                 </span>
-                <span ng-switch-when="true">
+                <span ng-switch-when="edit">
+                    <input type="text" ng-model="row.lastName" class="form-control" />
+                </span>
+                <span ng-switch-when="delete">
+                    <label class="deleted-item">{{row.lastName}}</label>
+                </span>
+                <span ng-switch-when="new">
                     <input type="text" ng-model="row.lastName" class="form-control" />
                 </span>
             </td>
-            <td ng-switch="row.isEditing" title="'Date of Birth'" class="dob-col">
+            <td ng-switch="row.actionState" class="dob-col">
                 <span ng-switch-default>
-                    <label>{{row.dob | date:'dd/MM/yyyy'}}</label>
+                    <label>{{row.dob | date:'yyyy/MM/dd'}}</label>
                 </span>
-                <div ng-switch-when="true" class="input-group">
+                <div ng-switch-when="edit" class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup ng-model="row.dob" is-open="row.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" readonly />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openDatePopup(row)"><i class="fa fa-calendar"></i></button>
+                    </span>
+                </div>
+                <span ng-switch-when="delete">
+                    <label class="deleted-item">{{row.dob | date:'yyyy/MM/dd'}}</label>
+                </span>
+                <div ng-switch-when="new" class="input-group">
                     <input type="text" class="form-control" uib-datepicker-popup ng-model="row.dob" is-open="row.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" readonly />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openDatePopup(row)"><i class="fa fa-calendar"></i></button>
                     </span>
                 </div>
             </td>
-            <td ng-switch="row.isEditing" class="edit-btn-col">
+            <td ng-switch="row.actionState" class="edit-btn-col">
                 <div class="btn-group" role="group" ng-switch-default>
-                    <button type="button" class="btn btn-default" ng-click="row.isEditing = !row.isEditing">
+                    <button type="button" class="btn btn-default" ng-click="vm.actions.edit(row)">
                         <i class="fa fa-pencil-square-o edit-btn"></i>
                     </button>
-                    <button type="button" class="btn btn-default"  ng-click="row.isEditing = !row.isEditing">
+                    <button type="button" class="btn btn-default"  ng-click="vm.actions.delete(row)">
                         <i class="fa fa-trash-o delete-btn"></i>
                     </button>
                 </div>
-                <div class="btn-group" role="group" ng-switch-when="true">
-                    <button type="button" class="btn btn-default"  ng-click="row.isEditing = !row.isEditing">
+                <div class="btn-group" role="group" ng-switch-when="edit">
+                    <button type="button" class="btn btn-default"  ng-click="vm.actions.save(row, $index)" ng-disabled="tForm.$invalid">
                         <i class="fa fa-floppy-o save-btn"></i>
                     </button>
-                    <button type="button" class="btn btn-default"  ng-click="row.isEditing = !row.isEditing">
+                    <button type="button" class="btn btn-default"  ng-click="vm.actions.undo(row, $index)">
                         <i class="fa fa-undo cancel-btn"></i>
+                    </button>
+                </div>
+                <div class="btn-group" role="group" ng-switch-when="delete">
+                    <button type="button" class="btn btn-default" ng-click="vm.actions.save(row, $index)">
+                        <i class="fa fa-floppy-o save-btn"></i>
+                    </button>
+                    <button type="button" class="btn btn-default" ng-click="vm.actions.undo(row, $index)">
+                        <i class="fa fa-times cancel-btn"></i>
+                    </button>
+                </div>
+                <div class="btn-group" role="group" ng-switch-when="new">
+                    <button type="button" class="btn btn-default" ng-click="vm.actions.save(row, $index)" ng-disabled="tForm.$invalid">
+                        <i class="fa fa-floppy-o save-btn"></i>
+                    </button>
+                    <button type="button" class="btn btn-default" ng-click="vm.actions.undo(row, $index)">
+                        <i class="fa fa-times cancel-btn"></i>
                     </button>
                 </div>
             </td>

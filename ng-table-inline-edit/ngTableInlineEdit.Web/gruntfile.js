@@ -101,13 +101,24 @@
             }
         },
         jshint: {
-            options: {
-                reporter: 'checkstyle',
-                reporterOutput: 'app/<%= pkg.name %>.jshint.output.xml'
+            beforeconcat:{
+                options: {
+                    reporter: 'checkstyle',
+                    reporterOutput: 'app/<%= pkg.name %>.before.jshint.output.xml'
+                },
+                files: {
+                    src: ['gruntfile.js', 'bower.json', 'package.json', '<%= appSettings.mainLoc %>/**/*.js', '<%= appSettings.dataLoc %>/**/*.js']
+                },
             },
-            // define the files to lint
-            beforeconcat: ['gruntfile.js', 'bower.json', 'package.json', '<%= appSettings.mainLoc %>/**/*.js', '<%= appSettings.dataLoc %>/**/*.js'],
-            afterconcat: ['app/<%= pkg.name %>.<%= appSettings.mainConcatFile %>.js', 'app/<%= pkg.name %>.<%= appSettings.dataConcatFile %>.js']
+            afterconcat:{
+                options: {
+                    reporter: 'checkstyle',
+                    reporterOutput: 'app/<%= pkg.name %>.after.jshint.output.xml'
+                },
+                files: {
+                    src: ['app/<%= pkg.name %>.<%= appSettings.mainConcatFile %>.js', 'app/<%= pkg.name %>.<%= appSettings.dataConcatFile %>.js']
+                },
+            }
         },
         concat: {
             options: {
